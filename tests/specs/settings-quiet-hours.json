@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Configure Quiet Hours",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Set quiet hours window and summary delivery preference"
+            }
+          }
+        ],
+        "send": {
+          "callback": "settings:quiet_hours"
+        }
+      }
+    ]
+  }
+]
