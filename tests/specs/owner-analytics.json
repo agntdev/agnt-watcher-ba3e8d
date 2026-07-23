@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Owner analytics shows users and top alerts",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "owner:analytics" },
+        "expect": [
+          {
+            "method": "sendMessage"
+          }
+        ]
+      }
+    ]
+  }
+]

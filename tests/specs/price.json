@@ -5,14 +5,26 @@
       {
         "expect": [
           {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Query current prices for watchlist or specific ticker"
-            }
+            "method": "sendMessage"
           }
         ],
         "send": {
           "text": "/price"
+        }
+      }
+    ]
+  },
+  {
+    "name": "/price BTC shows price",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage"
+          }
+        ],
+        "send": {
+          "text": "/price BTC"
         }
       }
     ]

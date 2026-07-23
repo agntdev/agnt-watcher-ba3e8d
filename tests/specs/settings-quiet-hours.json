@@ -7,13 +7,26 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Set quiet hours window and summary delivery preference"
+              "text": "Quiet hours: off\nSummary: queue alerts, send after"
             }
           }
         ],
         "send": {
           "callback": "settings:quiet_hours"
         }
+      },
+      {
+        "send": { "callback": "quiet:start" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "22:00" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Quiet hours updated to 22:00-07:00." }
+          }
+        ]
       }
     ]
   }

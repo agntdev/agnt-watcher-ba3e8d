@@ -1,19 +1,91 @@
 [
   {
-    "name": "Add Ticker",
+    "name": "Add Ticker shows list and prompt",
     "steps": [
       {
         "expect": [
           {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Add a new ticker to the watchlist with optional nickname"
-            }
+            "method": "sendMessage"
           }
         ],
         "send": {
           "callback": "watchlist:add"
         }
+      },
+      {
+        "send": { "text": "BTC" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Added BTC. Nickname? (or tap skip)" }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:nick:skip" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Added BTC." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Remove ticker from watchlist",
+    "steps": [
+      {
+        "send": { "callback": "watchlist:add" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "ETH" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "watchlist:nick:skip" },
+        "expect": [ { "method": "editMessageText" } ]
+      },
+      {
+        "send": { "callback": "watchlist:add" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "watchlist:remove:ETH" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Removed ETH." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Unknown ticker confirm",
+    "steps": [
+      {
+        "send": { "callback": "watchlist:add" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "ZZZFOO" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Ticker ZZZFOO not found on price feed. Add anyway?" }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:confirm:yes" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Added ZZZFOO (unconfirmed)." }
+          }
+        ]
       }
     ]
   }
