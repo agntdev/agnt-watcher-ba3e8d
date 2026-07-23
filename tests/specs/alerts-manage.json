@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Manage Alerts",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "View and edit threshold and percent move alerts for selected ticker"
+            }
+          }
+        ],
+        "send": {
+          "callback": "alerts:manage"
+        }
+      }
+    ]
+  }
+]
