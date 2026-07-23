@@ -7,7 +7,7 @@
         "expect": [
           {
             "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+            "payload": { "text": "CryptoWatch — track prices, set alerts, receive summaries.\nWatchlist seeded with BTC, ETH, TON." }
           }
         ]
       }

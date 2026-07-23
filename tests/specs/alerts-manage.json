@@ -7,13 +7,80 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View and edit threshold and percent move alerts for selected ticker"
+              "text": "Alerts:\nNo alerts set."
             }
           }
         ],
         "send": {
           "callback": "alerts:manage"
         }
+      }
+    ]
+  },
+  {
+    "name": "Create threshold alert",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "alerts:manage" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "alerts:pick:BTC" },
+        "expect": [ { "method": "editMessageText" } ]
+      },
+      {
+        "send": { "callback": "alerts:threshold" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "65000" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "alerts:setdir:above" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Threshold set: BTC above $65000" }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Alert triggering percent rule",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "alerts:manage" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "alerts:pick:BTC" },
+        "expect": [ { "method": "editMessageText" } ]
+      },
+      {
+        "send": { "callback": "alerts:percent" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "0.1" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "/price" },
+        "expect": [
+          {
+            "method": "sendMessage"
+          }
+        ]
       }
     ]
   }

@@ -7,13 +7,52 @@
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Enable/disable morning summary and set delivery time"
+              "text": "Morning summary disabled. Set a delivery time to enable."
             }
           }
         ],
         "send": {
           "callback": "settings:morning_summary"
         }
+      },
+      {
+        "send": { "callback": "morning:enable" },
+        "expect": [
+          {
+            "method": "editMessageText",
+            "payload": { "text": "Morning summary enabled at 08:00." }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Set morning time",
+    "steps": [
+      {
+        "send": { "callback": "settings:morning_summary" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "callback": "morning:set" },
+        "expect": [ { "method": "sendMessage" } ]
+      },
+      {
+        "send": { "text": "07:30" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "Morning summary set for 07:30." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "morning:preview" },
+        "expect": [
+          {
+            "method": "sendMessage"
+          }
+        ]
       }
     ]
   }
